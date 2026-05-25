@@ -3,8 +3,9 @@ DOMAIN-SUFFIX,orpheus.network
 DOMAIN-SUFFIX,home.opsfet.ch
 DOMAIN-SUFFIX,ourbits.club
 DOMAIN-KEYWORD,chdbits
+DOMAIN-SUFFIX,muyuan.do
 
-
+IP-CIDR,115.120.226.245/24,no-resolve
 IP-CIDR,183.207.0.0/16,no-resolve
 IP-CIDR,183.206.0.0/15,no-resolve
 IP-CIDR,223.5.5.5/32,no-resolve
