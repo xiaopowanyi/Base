@@ -2,6 +2,7 @@ PROCESS-NAME,QQ.exe
 PROCESS-NAME,Weixin.exe
 PROCESS-NAME,GameViewer.exe
 PROCESS-NAME,GameViewerServer.exe
+PROCESS-NAME,UURemote
 
 DOMAIN-SUFFIX,bing.com
 DOMAIN-SUFFIX,orpheus.network
