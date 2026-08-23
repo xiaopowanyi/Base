@@ -1,5 +1,6 @@
 PROCESS-NAME,QQ.exe
 PROCESS-NAME,Weixin.exe
+PROCESS-NAME,qbittorrent.exe
 PROCESS-NAME,GameViewer.exe
 PROCESS-NAME,GameViewerServer.exe
 PROCESS-NAME,UURemote
