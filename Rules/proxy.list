@@ -1,3 +1,6 @@
+PROCESS-NAME,ChatGPT
+PROCESS-NAME,ChatGPT.exe
+
 DOMAIN-SUFFIX,huawei.moe
 DOMAIN-SUFFIX,levelinfinite.com
 DOMAIN-SUFFIX,4gtv.tv
@@ -12,3 +15,17 @@ DOMAIN-SUFFIX,cloudflare.com
 DOMAIN-SUFFIX,download.jetbrains.com
 DOMAIN-SUFFIX,shuzijumin.com
 DOMAIN-SUFFIX,auth.openai.com
+DOMAIN-SUFFIX,hdhive.com
+DOMAIN-SUFFIX,re0.me
+DOMAIN-SUFFIX,workers.dev
+DOMAIN-SUFFIX,pages.dev
+DOMAIN-SUFFIX,chatgpt.com
+DOMAIN-SUFFIX,openai.com
+DOMAIN-SUFFIX,oaistatic.com
+DOMAIN-SUFFIX,oaiusercontent.com
+DOMAIN-SUFFIX,sora.com
+
+DOMAIN-KEYWORD,chatgpt
+DOMAIN-KEYWORD,openai
+
+GEOSITE,openai
