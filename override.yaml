@@ -1,0 +1,130 @@
+tcp-concurrent: true
+
+dns:
+  enable: true
+  ipv6: false
+  enhanced-mode: fake-ip
+
+  # 0. 用于解析下面所有带域名的 DOH 的 DNS
+  default-nameserver:
+    - 119.29.29.29
+    - 223.5.5.5
+
+  # 1. 明确国内域名、apple、PT 站点，走阿里/腾讯国内解析
+  nameserver-policy:
+    "geosite:cn,private,apple":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+    "springsunday.net,+.springsunday.net,+.m-team.cc,+.m-team.io,+.pterclub.net,+.ourbits.club,+.hdsky.me,+.chdbits.co,+.chdbits.xyz,+.ptchdbits.co,+.audiences.me,+.totheglory.im,+.hdhome.org,+.hdchina.org,+.keepfrds.com,+.open.cd,+.btschool.club,+.lemonhd.org,+.tjupt.org,+.byr.pt,+.greatposterwall.com,+.dicmusic.com,+.dmhy.org,+.hares.top,+.hdvideo.one,+.piggo.me,+.rousi.zip,+.pttime.org,+.discfan.net,+.ptsbao.club,+.carpt.net,+.haidan.video,+.kufei.org,+.eastgame.org,+.hhanclub.net,+.rainbowisland.co":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+
+  # 2. 全局默认 DNS 换成国外，并加上 #RULES 强制走代理（分流规则），由于 1.1.1.1 不匹配任何规则，会走到 MATCH，从而让远程节点服务器进行 DNS 解析
+  nameserver:
+    - "https://1.1.1.1/dns-query#RULES"
+    - "https://8.8.8.8/dns-query#RULES"
+
+  # 3. 用于解析节点的域名的 DNS
+  proxy-server-nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.pub/dns-query
+    - 119.29.29.29
+    - 223.5.5.5
+
+  # 4. 解析到最后发现是直连则走此 DNS
+  direct-nameserver:
+    - https://doh.pub/dns-query
+    - https://dns.alidns.com/dns-query
+
+  # 在 direct-nameserver 存在时，依然以 nameserver-policy 优先
+  direct-nameserver-follow-policy: true
+
+  fake-ip-range: 198.18.0.0/16
+  fake-ipv6-range: 240.0.0.0/4
+
+  fake-ip-filter-mode: rule
+  fake-ip-filter:
+    - DOMAIN-SUFFIX,de.zts.dpdns.org,real-ip
+    # 局域网与系统保留
+    - DOMAIN-SUFFIX,lan,real-ip
+    - DOMAIN-SUFFIX,local,real-ip
+    - DOMAIN-SUFFIX,arpa,real-ip
+    - DOMAIN-SUFFIX,internal,real-ip
+    - DOMAIN-SUFFIX,home.arpa,real-ip
+    - DOMAIN-SUFFIX,home,real-ip
+    - DOMAIN-SUFFIX,msftncsi.com,real-ip
+    - DOMAIN,www.msftconnecttest.com,real-ip
+    - DOMAIN,localhost.ptlogin2.qq.com,real-ip
+    - DOMAIN-SUFFIX,market.xiaomi.com,real-ip
+    # NTP 与时间服务
+    - DOMAIN-KEYWORD,time,real-ip
+    - DOMAIN-KEYWORD,ntp,real-ip
+    # 优先保证 Cloudflare Workers / Pages 等海外站点强制使用 fake-ip，防止被 tracker 误伤导致 GFW DNS 投毒
+    - DOMAIN-SUFFIX,workers.dev,fake-ip
+    - DOMAIN-SUFFIX,pages.dev,fake-ip
+    # PT / BT 下载核心关键字过滤（通配所有包含 tracker / torrent 的域名）
+    - DOMAIN-KEYWORD,tracker,real-ip
+    - DOMAIN-KEYWORD,torrent,real-ip
+    # 常用 PT 站点直连 / 真实解析
+    - DOMAIN-SUFFIX,chdbits.xyz,real-ip
+    - DOMAIN-SUFFIX,keepfrds.com,real-ip
+    - DOMAIN-SUFFIX,ptchdbits.co,real-ip
+    - DOMAIN-SUFFIX,springsunday.net,real-ip
+    - DOMAIN-SUFFIX,hhanclub.net,real-ip
+    - DOMAIN-SUFFIX,m-team.cc,real-ip
+    - DOMAIN-SUFFIX,pterclub.net,real-ip
+    - DOMAIN-SUFFIX,rainbowisland.co,real-ip
+    - DOMAIN-SUFFIX,ourbits.club,real-ip
+    - DOMAIN-SUFFIX,hdsky.me,real-ip
+    - DOMAIN-SUFFIX,chdbits.co,real-ip
+    - DOMAIN-SUFFIX,audiences.me,real-ip
+    - DOMAIN-SUFFIX,totheglory.im,real-ip
+    # 其他全部走 fake-ip
+    - MATCH,fake-ip
+
+sniffer:
+  enable: true
+  parse-pure-ip: true
+  force-dns-mapping: true
+  override-destination: true
+  sniff:
+    HTTP:
+      ports:
+        - 80
+        - 8080
+      override-destination: true
+    TLS:
+      ports:
+        - 443
+        - 8443
+      override-destination: true
+  skip-domain:
+    - +.push.apple.com
+  skip-dst-address:
+    - 91.105.192.0/23
+    - 91.108.4.0/22
+    - 91.108.8.0/21
+    - 91.108.16.0/21
+    - 91.108.56.0/22
+    - 95.161.64.0/20
+    - 149.154.160.0/20
+    - 185.76.151.0/24
+
+proxy:
+  ip-strategy: ipv4_only
+
+tun:
+  enable: true
+  auto-route: true
+  auto-redirect: false
+  auto-detect-interface: true
+  strict-route: true
+  route-exclude-address:
+    - 192.168.191.0/24
+    - 192.168.0.0/16
+    - 10.0.0.0/8
+    - 172.16.0.0/12
+    - 127.0.0.0/8
+
++rules:
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT # 阻止 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页
