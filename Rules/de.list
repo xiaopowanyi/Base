@@ -1,8 +1,22 @@
-DOMAIN-SUFFIX,reddit.com
+# --- 完整域名匹配 ---
+DOMAIN,config.rcs.mnc002.mcc262.jibecloud.net
+
+# --- 域名后缀匹配 ---
+DOMAIN-SUFFIX,6.ipw.cn
+DOMAIN-SUFFIX,byapps.net
+DOMAIN-SUFFIX,bybit.eu
 DOMAIN-SUFFIX,byr.pt
+DOMAIN-SUFFIX,coinbase.com
+DOMAIN-SUFFIX,de
+DOMAIN-SUFFIX,de.zts.dpdns.org
+DOMAIN-SUFFIX,metamask.io
+DOMAIN-SUFFIX,misty.cx
+DOMAIN-SUFFIX,myfin.bg
+DOMAIN-SUFFIX,n26.com
+DOMAIN-SUFFIX,reddit.com
 DOMAIN-SUFFIX,replit.com
 DOMAIN-SUFFIX,serv00.com
-DOMAIN-SUFFIX,metamask.io
-DOMAIN-SUFFIX,6.ipw.cn
 DOMAIN-SUFFIX,srv30788.blue.kundencontroller.de
-DOMAIN-SUFFIX,de.zts.dpdns.org
+
+# --- 域名关键字匹配 ---
+DOMAIN-KEYWORD,binance

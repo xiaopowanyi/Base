@@ -1,2 +1,8 @@
+# --- 域名后缀匹配 ---
+DOMAIN-SUFFIX,akamaized.net
+DOMAIN-SUFFIX,clubsim.com
 DOMAIN-SUFFIX,mytvsuper.com
 DOMAIN-SUFFIX,tvb.com
+
+# --- 域名关键字匹配 ---
+DOMAIN-KEYWORD,plasma

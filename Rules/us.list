@@ -1,6 +1,20 @@
-DOMAIN-SUFFIX,straighttalk.com
-DOMAIN-SUFFIX,jmsooo.com
+# --- 完整域名匹配 ---
+DOMAIN,feiyuefun.fun
+DOMAIN,ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
+
+# --- 域名后缀匹配 ---
+DOMAIN-SUFFIX,adobe.com
+DOMAIN-SUFFIX,asu.edu
 DOMAIN-SUFFIX,calleridtest.com
+DOMAIN-SUFFIX,jmsooo.com
+DOMAIN-SUFFIX,liquidity-financial.com
 DOMAIN-SUFFIX,now-dns.com
-DOMAIN-SUFFIX,straighttalk.com
+DOMAIN-SUFFIX,pitt.edu
 DOMAIN-SUFFIX,sora.com
+DOMAIN-SUFFIX,straighttalk.com
+DOMAIN-SUFFIX,tvbanywherena.com
+DOMAIN-SUFFIX,us
+
+# --- 域名关键字匹配 ---
+DOMAIN-KEYWORD,helium
+DOMAIN-KEYWORD,manus

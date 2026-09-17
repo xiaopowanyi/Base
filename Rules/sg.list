@@ -1,7 +1,10 @@
+# --- 域名后缀匹配 ---
+DOMAIN-SUFFIX,chybenzun.top
 DOMAIN-SUFFIX,pscdn.co
 DOMAIN-SUFFIX,scdn.co
 DOMAIN-SUFFIX,spoti.fi
 DOMAIN-SUFFIX,spotify.com
 DOMAIN-SUFFIX,spotifycdn.net
+
+# --- 域名关键字匹配 ---
 DOMAIN-KEYWORD,spotify
-DOMAIN-SUFFIX,chybenzun.top

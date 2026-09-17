@@ -1,2 +1,8 @@
-  DOMAIN-SUFFIX,tanhuatv.site
-  DOMAIN-SUFFIX,hinet.net
+# --- 完整域名匹配 ---
+DOMAIN,cdi.ofiii.com
+
+# --- 域名后缀匹配 ---
+DOMAIN-SUFFIX,4gtv.tv
+DOMAIN-SUFFIX,hinet.net
+DOMAIN-SUFFIX,ofiii.com
+DOMAIN-SUFFIX,tanhuatv.site

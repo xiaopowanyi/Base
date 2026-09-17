@@ -1,31 +1,20 @@
-PROCESS-NAME,ChatGPT
-PROCESS-NAME,ChatGPT.exe
+# --- 完整域名匹配 ---
+DOMAIN,avistaz.to
 
+# --- 域名后缀匹配 ---
+DOMAIN-SUFFIX,69shuba.cx
+DOMAIN-SUFFIX,bybit.com
+DOMAIN-SUFFIX,cloudflare.com
+DOMAIN-SUFFIX,crosswall.cc
+DOMAIN-SUFFIX,download.jetbrains.com
+DOMAIN-SUFFIX,hdhive.com
 DOMAIN-SUFFIX,huawei.moe
 DOMAIN-SUFFIX,levelinfinite.com
-DOMAIN-SUFFIX,4gtv.tv
-DOMAIN-SUFFIX,ofiii.com
-DOMAIN-SUFFIX,googlevideo.com
-DOMAIN-SUFFIX,youtube.com
 DOMAIN-SUFFIX,livednow.com
 DOMAIN-SUFFIX,livednow.org
-DOMAIN-SUFFIX,wx.sb
-DOMAIN-SUFFIX,69shuba.cx
-DOMAIN-SUFFIX,cloudflare.com
-DOMAIN-SUFFIX,download.jetbrains.com
-DOMAIN-SUFFIX,shuzijumin.com
-DOMAIN-SUFFIX,auth.openai.com
-DOMAIN-SUFFIX,hdhive.com
-DOMAIN-SUFFIX,re0.me
-DOMAIN-SUFFIX,workers.dev
 DOMAIN-SUFFIX,pages.dev
-DOMAIN-SUFFIX,chatgpt.com
-DOMAIN-SUFFIX,openai.com
-DOMAIN-SUFFIX,oaistatic.com
-DOMAIN-SUFFIX,oaiusercontent.com
-DOMAIN-SUFFIX,sora.com
-
-DOMAIN-KEYWORD,chatgpt
-DOMAIN-KEYWORD,openai
-
-GEOSITE,openai
+DOMAIN-SUFFIX,re0.me
+DOMAIN-SUFFIX,shuzijumin.com
+DOMAIN-SUFFIX,silicloud.com
+DOMAIN-SUFFIX,workers.dev
+DOMAIN-SUFFIX,wx.sb
