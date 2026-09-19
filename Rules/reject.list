@@ -1,6 +1,8 @@
 # --- IP-CIDR 规则 ---
 IP-CIDR,95.161.76.100/31,no-resolve
 
+DOMAIN-SUFFIX,msmp.abchina.com.cn
+
 # --- 完整域名匹配 ---
 DOMAIN,dl.wechat.com
 DOMAIN,dldir1.qq.com
