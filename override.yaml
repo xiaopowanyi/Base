@@ -63,11 +63,6 @@ dns:
     - 'time.apple.com'
     - '*.time.edu.cn'
     - '*.ntp.org.cn'
-    - '*time*'
-    - '*ntp*'
-    # PT / BT 下载核心关键字过滤（通配所有包含 tracker / torrent 的域名）
-    - '*tracker*'
-    - '*torrent*'
     # 常用 PT 站点直连 / 真实解析
     - '+.chdbits.xyz'
     - '+.keepfrds.com'
