@@ -56,6 +56,13 @@ dns:
     - 'localhost.ptlogin2.qq.com'
     - '+.market.xiaomi.com'
     # NTP 与时间服务
+    - '+.pool.ntp.org'
+    - 'time.*.com'
+    - 'time.*.gov'
+    - 'time.windows.com'
+    - 'time.apple.com'
+    - '*.time.edu.cn'
+    - '*.ntp.org.cn'
     - '*time*'
     - '*ntp*'
     # PT / BT 下载核心关键字过滤（通配所有包含 tracker / torrent 的域名）
