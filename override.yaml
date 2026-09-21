@@ -42,45 +42,39 @@ dns:
   fake-ip-range: 198.18.0.0/16
   fake-ipv6-range: 240.0.0.0/4
 
-  fake-ip-filter-mode: rule
   fake-ip-filter:
-    - DOMAIN-SUFFIX,de.zts.dpdns.org,real-ip
+    - '+.de.zts.dpdns.org'
     # 局域网与系统保留
-    - DOMAIN-SUFFIX,lan,real-ip
-    - DOMAIN-SUFFIX,local,real-ip
-    - DOMAIN-SUFFIX,arpa,real-ip
-    - DOMAIN-SUFFIX,internal,real-ip
-    - DOMAIN-SUFFIX,home.arpa,real-ip
-    - DOMAIN-SUFFIX,home,real-ip
-    - DOMAIN-SUFFIX,msftncsi.com,real-ip
-    - DOMAIN,www.msftconnecttest.com,real-ip
-    - DOMAIN,localhost.ptlogin2.qq.com,real-ip
-    - DOMAIN-SUFFIX,market.xiaomi.com,real-ip
+    - '+.lan'
+    - '+.local'
+    - '+.arpa'
+    - '+.internal'
+    - '+.home.arpa'
+    - '+.home'
+    - '+.msftncsi.com'
+    - 'www.msftconnecttest.com'
+    - 'localhost.ptlogin2.qq.com'
+    - '+.market.xiaomi.com'
     # NTP 与时间服务
-    - DOMAIN-KEYWORD,time,real-ip
-    - DOMAIN-KEYWORD,ntp,real-ip
-    # 优先保证 Cloudflare Workers / Pages 等海外站点强制使用 fake-ip，防止被 tracker 误伤导致 GFW DNS 投毒
-    - DOMAIN-SUFFIX,workers.dev,fake-ip
-    - DOMAIN-SUFFIX,pages.dev,fake-ip
+    - '*time*'
+    - '*ntp*'
     # PT / BT 下载核心关键字过滤（通配所有包含 tracker / torrent 的域名）
-    - DOMAIN-KEYWORD,tracker,real-ip
-    - DOMAIN-KEYWORD,torrent,real-ip
+    - '*tracker*'
+    - '*torrent*'
     # 常用 PT 站点直连 / 真实解析
-    - DOMAIN-SUFFIX,chdbits.xyz,real-ip
-    - DOMAIN-SUFFIX,keepfrds.com,real-ip
-    - DOMAIN-SUFFIX,ptchdbits.co,real-ip
-    - DOMAIN-SUFFIX,springsunday.net,real-ip
-    - DOMAIN-SUFFIX,hhanclub.net,real-ip
-    - DOMAIN-SUFFIX,m-team.cc,real-ip
-    - DOMAIN-SUFFIX,pterclub.net,real-ip
-    - DOMAIN-SUFFIX,rainbowisland.co,real-ip
-    - DOMAIN-SUFFIX,ourbits.club,real-ip
-    - DOMAIN-SUFFIX,hdsky.me,real-ip
-    - DOMAIN-SUFFIX,chdbits.co,real-ip
-    - DOMAIN-SUFFIX,audiences.me,real-ip
-    - DOMAIN-SUFFIX,totheglory.im,real-ip
-    # 其他全部走 fake-ip
-    - MATCH,fake-ip
+    - '+.chdbits.xyz'
+    - '+.keepfrds.com'
+    - '+.ptchdbits.co'
+    - '+.springsunday.net'
+    - '+.hhanclub.net'
+    - '+.m-team.cc'
+    - '+.pterclub.net'
+    - '+.rainbowisland.co'
+    - '+.ourbits.club'
+    - '+.hdsky.me'
+    - '+.chdbits.co'
+    - '+.audiences.me'
+    - '+.totheglory.im'
 
 sniffer:
   enable: true
