@@ -21,3 +21,7 @@ DOMAIN-SUFFIX,shuzijumin.com
 DOMAIN-SUFFIX,silicloud.com
 DOMAIN-SUFFIX,workers.dev
 DOMAIN-SUFFIX,wx.sb
+
+# --- 域名关键字匹配 ---
+DOMAIN-KEYWORD,meta
+DOMAIN-KEYWORD,muse
