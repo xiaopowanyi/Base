@@ -16,7 +16,10 @@ dns:
     "push.apple.com,+.push.apple.com,identity.apple.com":
       - "https://1.1.1.1/dns-query#RULES"
       - "https://8.8.8.8/dns-query#RULES"
-    "geosite:apple@cn,*.apple.com,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com,geosite:cn,private":
+    "*.apple.com,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com":
+      - https://doh.pub/dns-query
+      - https://dns.alidns.com/dns-query
+    "geosite:cn,private":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
     "springsunday.net,+.springsunday.net,+.m-team.cc,+.m-team.io,+.pterclub.net,+.ourbits.club,+.hdsky.me,+.chdbits.co,+.chdbits.xyz,+.ptchdbits.co,+.audiences.me,+.totheglory.im,+.hdhome.org,+.hdchina.org,+.keepfrds.com,+.open.cd,+.btschool.club,+.lemonhd.org,+.tjupt.org,+.byr.pt,+.greatposterwall.com,+.dicmusic.com,+.dmhy.org,+.hares.top,+.hdvideo.one,+.piggo.me,+.rousi.zip,+.pttime.org,+.discfan.net,+.ptsbao.club,+.carpt.net,+.haidan.video,+.kufei.org,+.eastgame.org,+.hhanclub.net,+.rainbowisland.co":
