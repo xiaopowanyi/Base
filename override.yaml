@@ -63,10 +63,7 @@ dns:
     - 'www.msftconnecttest.com'
     - 'localhost.ptlogin2.qq.com'
     - '+.market.xiaomi.com'
-    # SideStore 本地回环与服务
-    - '10.7.0.1'
     - 'localhost'
-    - '+.sidestore.io'
     # Apple App Store 与极速下载 CDN (直连中国大陆 CDN 节点)
     - '+.mzstatic.com'
     - '+.cdn-apple.com'
@@ -136,8 +133,6 @@ tun:
   auto-redirect: false
   auto-detect-interface: true
   strict-route: true
-  loopback-address:
-    - 10.7.0.1
   route-exclude-address:
     - 192.168.191.0/24
     - 192.168.0.0/16
@@ -145,8 +140,7 @@ tun:
     - 127.0.0.0/8
 
 +rules:
-  # 1. SideStore 本地回环与证书服务 (支持 10.7.0.1 续签通信与 Apple 认证)
-  - IP-CIDR,10.7.0.0/24,DIRECT,no-resolve
+  # 1. 本地回环与 Apple 认证直连 (支持 Apple ID 与 App Store 稳定直连)
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - DOMAIN,localhost,DIRECT
   - DOMAIN,gsa.apple.com,DIRECT
