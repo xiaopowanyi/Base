@@ -16,7 +16,7 @@ dns:
     "push.apple.com,+.push.apple.com,identity.apple.com":
       - "https://1.1.1.1/dns-query#RULES"
       - "https://8.8.8.8/dns-query#RULES"
-    "*.apple.com,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com":
+    "*.apple.com.cn,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com,serverstatus.apple.com,lcdn-locator.apple.com":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
     "geosite:cn,private":
@@ -68,17 +68,13 @@ dns:
     - 'localhost'
     - '+.sidestore.io'
     # Apple App Store 与极速下载 CDN (直连中国大陆 CDN 节点)
-    - '+.apple.com'
     - '+.mzstatic.com'
     - '+.cdn-apple.com'
     - '+.aaplimg.com'
-    - '+.icloud.com'
     - 'itunes.apple.com'
     - '+.itunes.apple.com'
     - 'apps.apple.com'
-    # Apple 推送通知服务 APNs 真实解析 (彻底解决 Telegram 等后台通知收不到的问题)
-    - '+.push.apple.com'
-    - 'identity.apple.com'
+    - '+.apple.com.cn'
     # NTP 与时间服务
     - '+.pool.ntp.org'
     - 'time.*.com'
@@ -155,6 +151,7 @@ tun:
   - DOMAIN,localhost,DIRECT
   - DOMAIN,gsa.apple.com,节点选择
   # 2. Apple APNs 苹果推送服务走境外代理 (独立静态策略组，长连接不随日常切节点而断开)
+  - DST-PORT,5223,苹果推送
   - DOMAIN-SUFFIX,push.apple.com,苹果推送
   - DOMAIN,identity.apple.com,苹果推送
   - IP-CIDR,17.249.0.0/16,苹果推送,no-resolve
