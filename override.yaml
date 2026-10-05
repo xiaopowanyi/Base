@@ -16,7 +16,7 @@ dns:
     "push.apple.com,+.push.apple.com,identity.apple.com":
       - "https://1.1.1.1/dns-query#RULES"
       - "https://8.8.8.8/dns-query#RULES"
-    "geosite:cn,private,apple":
+    "geosite:apple@cn,*.apple.com,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com,geosite:cn,private":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
     "springsunday.net,+.springsunday.net,+.m-team.cc,+.m-team.io,+.pterclub.net,+.ourbits.club,+.hdsky.me,+.chdbits.co,+.chdbits.xyz,+.ptchdbits.co,+.audiences.me,+.totheglory.im,+.hdhome.org,+.hdchina.org,+.keepfrds.com,+.open.cd,+.btschool.club,+.lemonhd.org,+.tjupt.org,+.byr.pt,+.greatposterwall.com,+.dicmusic.com,+.dmhy.org,+.hares.top,+.hdvideo.one,+.piggo.me,+.rousi.zip,+.pttime.org,+.discfan.net,+.ptsbao.club,+.carpt.net,+.haidan.video,+.kufei.org,+.eastgame.org,+.hhanclub.net,+.rainbowisland.co":
@@ -64,6 +64,15 @@ dns:
     - '10.7.0.1'
     - 'localhost'
     - '+.sidestore.io'
+    # Apple App Store 与极速下载 CDN (直连中国大陆 CDN 节点)
+    - '+.apple.com'
+    - '+.mzstatic.com'
+    - '+.cdn-apple.com'
+    - '+.aaplimg.com'
+    - '+.icloud.com'
+    - 'itunes.apple.com'
+    - '+.itunes.apple.com'
+    - 'apps.apple.com'
     # Apple 推送通知服务 APNs 真实解析 (彻底解决 Telegram 等后台通知收不到的问题)
     - '+.push.apple.com'
     - 'identity.apple.com'
@@ -137,17 +146,13 @@ tun:
     - 127.0.0.0/8
 
 +rules:
-  # 1. 阻止 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页
-  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
-  # 2. SideStore 本地回环与证书服务 (支持 10.7.0.1 续签通信与 Apple 认证)
+  # 1. SideStore 本地回环与证书服务 (支持 10.7.0.1 续签通信与 Apple 认证)
   - IP-CIDR,10.7.0.1/32,DIRECT,no-resolve
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - DOMAIN,localhost,DIRECT
   - DOMAIN,gsa.apple.com,节点选择
-  # 3. Apple APNs 苹果推送服务走境外代理 (独立静态策略组，长连接不随日常切节点而断开)
+  # 2. Apple APNs 苹果推送服务走境外代理 (独立静态策略组，长连接不随日常切节点而断开)
   - DOMAIN-SUFFIX,push.apple.com,苹果推送
-  - DOMAIN-SUFFIX,akadns.net,苹果推送
-  - DOMAIN-KEYWORD,apple.com.edgekey.net,苹果推送
   - DOMAIN,identity.apple.com,苹果推送
   - IP-CIDR,17.249.0.0/16,苹果推送,no-resolve
   - IP-CIDR,17.252.0.0/16,苹果推送,no-resolve
@@ -158,3 +163,13 @@ tun:
   - IP-CIDR6,2403:300:a42::/48,苹果推送,no-resolve
   - IP-CIDR6,2403:300:a51::/48,苹果推送,no-resolve
   - IP-CIDR6,2a01:b740:a42::/48,苹果推送,no-resolve
+  # 3. Apple App Store 与 CDN 极速直连 (确保商店秒开、应用与系统更新跑满带宽)
+  - DOMAIN,serverstatus.apple.com,DIRECT
+  - DOMAIN,lcdn-locator.apple.com,DIRECT
+  - DOMAIN-SUFFIX,mzstatic.com,DIRECT
+  - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
+  - DOMAIN-SUFFIX,aaplimg.com,DIRECT
+  - DOMAIN-SUFFIX,itunes.apple.com,DIRECT
+  - DOMAIN,apps.apple.com,DIRECT
+  # 4. 阻止非 Apple 服务的 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
