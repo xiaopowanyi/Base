@@ -13,13 +13,10 @@ dns:
   # 1. 国内域名、私网、Apple 基础服务与 PT 站点走阿里/腾讯国内解析获取最低延迟 CDN
   #    注意：Apple APNs 推送服务 (push.apple.com / identity.apple.com) 必须走海外 DOH 解析，严禁走国内 DNS 解析成国内被墙/干扰的 APNs IP！
   nameserver-policy:
-    "gsa.apple.com,developerservices2.apple.com,ppq.apple.com":
-      - "https://1.1.1.1/dns-query#RULES"
-      - "https://8.8.8.8/dns-query#RULES"
     "push.apple.com,+.push.apple.com,identity.apple.com":
       - "https://1.1.1.1/dns-query#RULES"
       - "https://8.8.8.8/dns-query#RULES"
-    "*.apple.com.cn,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com,serverstatus.apple.com,lcdn-locator.apple.com":
+    "*.apple.com.cn,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,apps.apple.com,serverstatus.apple.com,lcdn-locator.apple.com,gsa.apple.com,developerservices2.apple.com,ppq.apple.com":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
     "geosite:cn,private":
@@ -152,9 +149,9 @@ tun:
   - IP-CIDR,10.7.0.0/24,DIRECT,no-resolve
   - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
   - DOMAIN,localhost,DIRECT
-  - DOMAIN,gsa.apple.com,节点选择
-  - DOMAIN,developerservices2.apple.com,节点选择
-  - DOMAIN,ppq.apple.com,节点选择
+  - DOMAIN,gsa.apple.com,DIRECT
+  - DOMAIN,developerservices2.apple.com,DIRECT
+  - DOMAIN,ppq.apple.com,DIRECT
   # 2. Apple APNs 苹果推送服务走境外代理 (独立静态策略组，长连接不随日常切节点而断开)
   - DST-PORT,5223,苹果推送
   - DOMAIN-SUFFIX,push.apple.com,苹果推送
