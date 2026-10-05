@@ -10,8 +10,12 @@ dns:
     - 119.29.29.29
     - 223.5.5.5
 
-  # 1. 明确国内域名、apple、PT 站点，走阿里/腾讯国内解析
+  # 1. 国内域名、私网、Apple 基础服务与 PT 站点走阿里/腾讯国内解析获取最低延迟 CDN
+  #    注意：Apple APNs 推送服务 (push.apple.com / identity.apple.com) 必须走海外 DOH 解析，严禁走国内 DNS 解析成国内被墙/干扰的 APNs IP！
   nameserver-policy:
+    "push.apple.com,+.push.apple.com,identity.apple.com":
+      - "https://1.1.1.1/dns-query#RULES"
+      - "https://8.8.8.8/dns-query#RULES"
     "geosite:cn,private,apple":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
@@ -23,6 +27,7 @@ dns:
   nameserver:
     - "https://1.1.1.1/dns-query#RULES"
     - "https://8.8.8.8/dns-query#RULES"
+  fallback: []
 
   # 3. 用于解析节点的域名的 DNS
   proxy-server-nameserver:
@@ -55,6 +60,13 @@ dns:
     - 'www.msftconnecttest.com'
     - 'localhost.ptlogin2.qq.com'
     - '+.market.xiaomi.com'
+    # SideStore 本地回环与服务
+    - '10.7.0.1'
+    - 'localhost'
+    - '+.sidestore.io'
+    # Apple 推送通知服务 APNs 真实解析 (彻底解决 Telegram 等后台通知收不到的问题)
+    - '+.push.apple.com'
+    - 'identity.apple.com'
     # NTP 与时间服务
     - '+.pool.ntp.org'
     - 'time.*.com'
@@ -111,16 +123,38 @@ proxy:
 
 tun:
   enable: true
+  stack: mixed
   auto-route: true
   auto-redirect: false
   auto-detect-interface: true
   strict-route: true
+  loopback-address:
+    - 10.7.0.1
   route-exclude-address:
     - 192.168.191.0/24
     - 192.168.0.0/16
-    - 10.0.0.0/8
     - 172.16.0.0/12
     - 127.0.0.0/8
 
 +rules:
-  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT # 阻止 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页
+  # 1. 阻止 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页
+  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
+  # 2. SideStore 本地回环与证书服务 (支持 10.7.0.1 续签通信与 Apple 认证)
+  - IP-CIDR,10.7.0.1/32,DIRECT,no-resolve
+  - IP-CIDR,127.0.0.0/8,DIRECT,no-resolve
+  - DOMAIN,localhost,DIRECT
+  - DOMAIN,gsa.apple.com,节点选择
+  # 3. Apple APNs 苹果推送服务走境外代理 (独立静态策略组，长连接不随日常切节点而断开)
+  - DOMAIN-SUFFIX,push.apple.com,苹果推送
+  - DOMAIN-SUFFIX,akadns.net,苹果推送
+  - DOMAIN-KEYWORD,apple.com.edgekey.net,苹果推送
+  - DOMAIN,identity.apple.com,苹果推送
+  - IP-CIDR,17.249.0.0/16,苹果推送,no-resolve
+  - IP-CIDR,17.252.0.0/16,苹果推送,no-resolve
+  - IP-CIDR,17.57.144.0/22,苹果推送,no-resolve
+  - IP-CIDR,17.188.128.0/18,苹果推送,no-resolve
+  - IP-CIDR,17.188.20.0/23,苹果推送,no-resolve
+  - IP-CIDR6,2620:149:a44::/48,苹果推送,no-resolve
+  - IP-CIDR6,2403:300:a42::/48,苹果推送,no-resolve
+  - IP-CIDR6,2403:300:a51::/48,苹果推送,no-resolve
+  - IP-CIDR6,2a01:b740:a42::/48,苹果推送,no-resolve
