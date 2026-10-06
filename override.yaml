@@ -16,7 +16,7 @@ dns:
     "push.apple.com,+.push.apple.com,identity.apple.com":
       - "https://1.1.1.1/dns-query#RULES"
       - "https://8.8.8.8/dns-query#RULES"
-    "*.apple.com,*.apple.com.cn,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,*.itunes-apple.com.akadns.net,*.apple.com.akadns.net,*.apple-support.akadns.net,*.apple.com.edgekey.net,*.appsto.re,apps.apple.com,serverstatus.apple.com,lcdn-locator.apple.com,gsa.apple.com,developerservices2.apple.com,ppq.apple.com":
+    "apple.com,*.apple.com,*.apple.com.cn,*.cdn-apple.com,*.mzstatic.com,*.aaplimg.com,itunes.apple.com,*.itunes.apple.com,*.itunes-apple.com.akadns.net,*.apple.com.akadns.net,*.apple-support.akadns.net,*.apple.com.edgekey.net,*.appsto.re,apps.apple.com,serverstatus.apple.com,lcdn-locator.apple.com,gsa.apple.com,developerservices2.apple.com,ppq.apple.com,icloud.com,*.icloud.com,*.icloud-content.com,*.icloud.com.akadns.net":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
     "geosite:cn,private":
@@ -65,8 +65,13 @@ dns:
     - '+.market.xiaomi.com'
     - 'localhost'
     # Apple App Store 与极速下载 CDN (直连中国大陆 CDN 节点)
+    - 'apple.com'
     - '+.apple.com'
     - '+.apple.com.cn'
+    - 'icloud.com'
+    - '+.icloud.com'
+    - '+.icloud-content.com'
+    - '+.icloud.com.akadns.net'
     - '+.mzstatic.com'
     - '+.cdn-apple.com'
     - '+.aaplimg.com'
@@ -181,6 +186,10 @@ tun:
   - DOMAIN-KEYWORD,itunes-apple.com.akadns.net,DIRECT
   - DOMAIN-KEYWORD,apple.com.edgekey.net,DIRECT
   - DOMAIN-KEYWORD,buy.itunes.apple.com,DIRECT
+  - DOMAIN,apple.com,DIRECT
+  - DOMAIN,icloud.com,DIRECT
+  - DOMAIN,www.icloud.com,DIRECT
+  - DOMAIN-KEYWORD,icloud.com.akadns.net,DIRECT
   - DOMAIN-SUFFIX,mzstatic.com,DIRECT
   - DOMAIN-SUFFIX,cdn-apple.com,DIRECT
   - DOMAIN-SUFFIX,aaplimg.com,DIRECT
