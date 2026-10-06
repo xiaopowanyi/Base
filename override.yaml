@@ -204,7 +204,6 @@ tun:
   - DOMAIN-SUFFIX,apple-cloudkit.com,DIRECT
   - DOMAIN-SUFFIX,icloud.com,DIRECT
   - DOMAIN-SUFFIX,icloud-content.com,DIRECT
-  - IP-CIDR,17.0.0.0/8,DIRECT,no-resolve
   # 4. 精准阻止 YouTube / GoogleVideo 的 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页，同时不误杀国内 HTTP/3
   - AND,((DST-PORT,443),(NETWORK,UDP),(DOMAIN-SUFFIX,googlevideo.com)),REJECT
   - AND,((DST-PORT,443),(NETWORK,UDP),(DOMAIN-SUFFIX,youtube.com)),REJECT
