@@ -64,6 +64,9 @@ dns:
     - 'localhost.ptlogin2.qq.com'
     - '+.market.xiaomi.com'
     - 'localhost'
+    # APNs 使用真实解析结果，避免推送长连接经 Fake-IP 映射
+    - '+.push.apple.com'
+    - 'identity.apple.com'
     # Apple App Store 与极速下载 CDN (直连中国大陆 CDN 节点)
     - 'apple.com'
     - '+.apple.com'
