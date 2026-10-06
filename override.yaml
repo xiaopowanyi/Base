@@ -169,6 +169,8 @@ tun:
   - DST-PORT,5223,苹果推送
   - DOMAIN-SUFFIX,push.apple.com,苹果推送
   - DOMAIN,identity.apple.com,苹果推送
+  - DOMAIN-KEYWORD,push-apple.com.akadns.net,苹果推送
+  - DOMAIN-KEYWORD,courier-push-apple.com.akadns.net,苹果推送
   - IP-CIDR,17.249.0.0/16,苹果推送,no-resolve
   - IP-CIDR,17.252.0.0/16,苹果推送,no-resolve
   - IP-CIDR,17.57.144.0/22,苹果推送,no-resolve
