@@ -32,12 +32,12 @@ dns:
     - "https://8.8.8.8/dns-query#RULES"
   fallback: []
 
-  # 3. 用于解析节点的域名的 DNS
+  # 3. 用于解析节点的域名的 DNS (纯 UDP DNS 优先，保障初次连接与切网毫秒级解析)
   proxy-server-nameserver:
+    - 223.5.5.5
+    - 119.29.29.29
     - https://dns.alidns.com/dns-query
     - https://doh.pub/dns-query
-    - 119.29.29.29
-    - 223.5.5.5
 
   # 4. 解析到最后发现是直连则走此 DNS
   direct-nameserver:
@@ -205,5 +205,6 @@ tun:
   - DOMAIN-SUFFIX,icloud.com,DIRECT
   - DOMAIN-SUFFIX,icloud-content.com,DIRECT
   - IP-CIDR,17.0.0.0/8,DIRECT,no-resolve
-  # 4. 阻止非 Apple 服务的 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页
-  - AND,((DST-PORT,443),(NETWORK,UDP)),REJECT
+  # 4. 精准阻止 YouTube / GoogleVideo 的 QUIC (UDP 443)，解决 YouTube 报“未联网”并秒开网页，同时不误杀国内 HTTP/3
+  - AND,((DST-PORT,443),(NETWORK,UDP),(DOMAIN-SUFFIX,googlevideo.com)),REJECT
+  - AND,((DST-PORT,443),(NETWORK,UDP),(DOMAIN-SUFFIX,youtube.com)),REJECT
